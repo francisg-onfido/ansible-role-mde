@@ -14,7 +14,7 @@
   apt_repository:
     repo: "deb [arch=arm64,armhf,amd64] https://packages.microsoft.com/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version }}/prod {{ (channel == 'prod') | ternary(ansible_distribution_release, channel) }} main" # noqa 204
     filename: "microsoft-{{ channel }}.list"
-    update_cache: yes
+    update_cache: no
     state: "{{ uninstall | ternary ('absent', 'present') }}"
   when: ansible_os_family == "Debian"
   tags:

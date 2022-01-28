@@ -63,6 +63,17 @@
 - name: Setup packages.microsoft.com repository.
   include_tasks: repository.yml
 
+- name: apt-get update
+  apt:
+    update_cache: yes
+  when:
+    - not uninstall
+    - ansible_os_family == "Debian"
+  tags:
+    - install
+    - dependencies
+
+
 - name: Unzip the onboarding package from Microsoft Defender Security Center.
   include_tasks: onboarding_setup.yml
 
